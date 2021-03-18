@@ -137,6 +137,10 @@ class RoleController extends AdminDefaultController
 
 		if ( $model->load(Yii::$app->request->post()) && $model->save() )
 		{
+			Role::assignRoutesViaPermission($model->name,'AplicacaoSiteAcessosComum', [
+				'/site/index',
+			], 'Acessar a Index (Dashboard)', 'userCommonPermissions');
+			
 			return $this->redirect(['view', 'id'=>$model->name]);
 		}
 
